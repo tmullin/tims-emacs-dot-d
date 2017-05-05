@@ -1,0 +1,15 @@
+# name: newscript
+# key: newscript
+# --
+#!/usr/local/bin/perl
+
+use strict;
+use warnings;
+no warnings 'uninitialized';
+
+use Athena::Lib;
+
+use AthenaUtils;
+use SQL;
+use Data::Dumper;
+

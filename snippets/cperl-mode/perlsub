@@ -1,0 +1,250 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: perlsub
+# key: perlsub
+# contributor: Tyson Gray
+# --
+################################################################################`(progn (defvar yas-perlsub-tmpvar-required "") (setq yas-perlsub-tmpvar-required "") (defvar yas-perlsub-tmpvar-optional "") (setq yas-perlsub-tmpvar-optional "") (defvar yas-perlsub-tmpvar-first-arg "") (setq yas-perlsub-tmpvar-first-arg "") (defvar yas-perlsub-tmpvar-multiline-args nil) (setq yas-perlsub-tmpvar-multiline-args nil) "")`
+# $1
+#
+# Description:
+#	${5:$$(
+
+	cond
+	(yas-moving-away-p
+	 (let ((this-field (overlay-get yas--active-field-overlay 'yas--field)))
+	   (save-excursion
+		 (goto-char (yas--field-start this-field))
+		 (yas--inhibit-overlay-hooks
+		   (while (<= (1+ (count-lines 1 (point))) (1+ (count-lines 1 (yas--field-end this-field))))
+			 (cond
+			  ((> (length (buffer-substring-no-properties (line-beginning-position) (line-end-position))) fill-column)
+			   (fill-region (line-beginning-position) (line-end-position))))
+			 (forward-line))))))
+	(t
+	 (let ((tabbed-newline (replace-regexp-in-string "\\n\\\\(?:#\\t\\\\)?\\\\([^#]\\\\)" "\\n#\\t\\\\1" yas-text)))
+	   (replace-regexp-in-string "\\n\\n" "\\n#\\n" tabbed-newline)))
+
+)}
+#
+# Parameters:${2:$(
+
+	progn
+	 (setq yas-perlsub-tmpvar-first-arg yas-text)
+	 (if (member yas-perlsub-tmpvar-first-arg '("$dbh, " "$self, " "$class, " "$class, $dbh, "))
+		 (concat (cond
+				  ((string-equal "$dbh, " yas-text) "\\n#\\tA database handle")
+				  ((string-equal "$self, " yas-text) "\\n#\\tThe invocant (an object of or derived from this class)")
+				  ((string-equal "$class, " yas-text) "\\n#\\tThe invocant (a class name)")
+				  ((string-equal "$class, $dbh, " yas-text) "\\n#\\tThe invocant (a class name)"))
+				 (if (and (zerop (length yas-perlsub-tmpvar-required))
+						  (zerop (length yas-perlsub-tmpvar-optional)))
+					 ".\\n#"
+				   " ")))
+
+)}${6:$(
+
+	cond
+	((and (not (zerop (length yas-text)))
+		  (not (member yas-perlsub-tmpvar-first-arg '("$dbh, " "$self, " "$class, " "$class, $dbh, "))))
+	 "\\n#\\t")
+	((and (zerop (length yas-text))
+		  (not (member yas-perlsub-tmpvar-first-arg '("$dbh, " "$self, " "$class, " "$class, $dbh, ")))
+		  (or (not (zerop (length yas-perlsub-tmpvar-required)))
+			  (not (zerop (length yas-perlsub-tmpvar-optional)))))
+	 "\\n#\\t")
+
+)}${6:$$(
+
+	cond
+	(yas-moving-away-p
+	 (let ((this-field (overlay-get yas--active-field-overlay 'yas--field)))
+	   (save-excursion
+		 (goto-char (yas--field-start this-field))
+		 (yas--inhibit-overlay-hooks
+		   (while (<= (1+ (count-lines 1 (point))) (1+ (count-lines 1 (yas--field-end this-field))))
+			 (cond
+			  ((> (length (buffer-substring-no-properties (line-beginning-position) (line-end-position))) fill-column)
+			   (fill-region (line-beginning-position) (line-end-position))))
+			 (forward-line))))))
+	(t
+	 (let ((tabbed-newline (replace-regexp-in-string "\\n\\\\(?:#\\t\\\\)?\\\\([^#]\\\\)" "\\n#\\t\\\\1" yas-text)))
+	   (replace-regexp-in-string "\\n\\n" "\\n#\\n" tabbed-newline)))
+
+)}${6:$(
+
+	cond
+	((not (zerop (length yas-text))) "\\n#")
+	((and (zerop (length yas-text))
+		  (or (not (zerop (length yas-perlsub-tmpvar-required)))
+			  (not (zerop (length yas-perlsub-tmpvar-optional)))))
+	 (concat
+	  (if (member yas-perlsub-tmpvar-first-arg '("$dbh, " "$self, " "$class, " "$class, $dbh, "))
+		  "and"
+		"This method takes")
+	  " a reference to a hash of parameters:\\n#"))
+
+)}${3:$(
+
+	cond
+	((not (zerop (length yas-perlsub-tmpvar-required)))
+	 "\\n#\\tRequired:")
+	((and (zerop (length yas-perlsub-tmpvar-required)) (not (zerop (length yas-perlsub-tmpvar-optional))))
+	 "\\n#\\tOptional:")
+	((not (member yas-perlsub-tmpvar-first-arg '("$dbh, " "$self, " "$class, " "$class, $dbh, ")))
+	 "\\n#\\tNone.\\n#")
+
+)}${4:$(
+
+	cond ((not (zerop (length yas-perlsub-tmpvar-required)))
+		  (let* ((myargs (split-string yas-perlsub-tmpvar-required "\\\\(?: \\\\|\\t\\\\|\\n\\\\)+"))
+				 (longestarg (let ((returnval 0))
+							   (dolist (currentval myargs returnval)
+								 (if (> (length currentval) returnval)
+									 (setq returnval (length currentval)))))))
+			(concat
+			 (let (finalstring)
+			   (dolist (currentarg myargs finalstring)
+				 (setq finalstring (concat
+									finalstring
+									"\\n#\\n#\\t"
+									currentarg
+									(if (< longestarg 25)
+										(concat
+										 (let (spaces) (dotimes (time (- longestarg (length currentarg)) spaces) (setq spaces (concat spaces " "))))
+										 " - ")
+									  "\\n#\\t    ")))))
+			 (if (zerop (length yas-perlsub-tmpvar-optional))
+				 "\\n#"))))
+		 ((and (zerop (length yas-perlsub-tmpvar-required)) (not (zerop (length yas-perlsub-tmpvar-optional))))
+		  (let* ((myargs (split-string yas-perlsub-tmpvar-optional "\\\\(?: \\\\|\\t\\\\|\\n\\\\)+"))
+				 (longestarg (let ((returnval 0))
+							   (dolist (currentval myargs returnval)
+								 (if (> (length currentval) returnval)
+									 (setq returnval (length currentval)))))))
+			(concat
+			 (let (finalstring)
+			   (dolist (currentarg myargs finalstring)
+				 (setq finalstring (concat
+									finalstring
+									"\\n#\\n#\\t"
+									currentarg
+									(if (< longestarg 25)
+										(concat
+										 (let (spaces) (dotimes (time (- longestarg (length currentarg)) spaces) (setq spaces (concat spaces " "))))
+										 " - ")
+									  "\\n#\\t    ")))))
+			 "\\n#")))
+
+)}${4:$(
+
+	if (and (not (zerop (length yas-perlsub-tmpvar-required))) (not (zerop (length yas-perlsub-tmpvar-optional))))
+	   (concat "\\n#\\n#\\tOptional:" (let* ((myargs (split-string yas-perlsub-tmpvar-optional "\\\\(?: \\\\|\\t\\\\|\\n\\\\)+"))
+											 (longestarg (let ((returnval 0))
+														   (dolist (currentval myargs returnval)
+															 (if (> (length currentval) returnval)
+																 (setq returnval (length currentval)))))))
+										(concat
+										 (let (finalstring)
+										   (dolist (currentarg myargs finalstring)
+											 (setq finalstring (concat
+																finalstring
+																"\\n#\\n#\\t"
+																currentarg
+																(if (< longestarg 25)
+																	(concat
+																	 (let (spaces) (dotimes (time (- longestarg (length currentarg)) spaces) (setq spaces (concat spaces " "))))
+																	 " - ")
+																  "\\n#\\t    ")))))
+										 "\\n#")))
+
+)}
+# Return Value:
+#	${7:$$(
+
+	cond
+	(yas-moving-away-p
+	 (let ((this-field (overlay-get yas--active-field-overlay 'yas--field)))
+	   (save-excursion
+		 (goto-char (yas--field-start this-field))
+		 (yas--inhibit-overlay-hooks
+		   (while (<= (1+ (count-lines 1 (point))) (1+ (count-lines 1 (yas--field-end this-field))))
+			 (cond
+			  ((> (length (buffer-substring-no-properties (line-beginning-position) (line-end-position))) fill-column)
+			   (fill-region (line-beginning-position) (line-end-position))))
+			 (forward-line))))))
+	(t
+	 (let ((tabbed-newline (replace-regexp-in-string "\\n\\\\(?:#\\t\\\\)?\\\\([^#]\\\\)" "\\n#\\t\\\\1" yas-text)))
+	   (replace-regexp-in-string "\\n\\n" "\\n#\\n" tabbed-newline)))
+
+)}${7:$(
+
+	if (zerop (length yas-text)) "Not meaningful."
+
+)}
+################################################################################
+sub ${1:NEWSUBNAME} {
+	my (${2:$$(
+
+	   yas-choose-value '("" "$dbh, " "$self, " "$class, " "$class, $dbh, ")
+
+	)}$args) = @_;
+	AssertFields($args, [${3:$(
+
+		unless (zerop (length yas-perlsub-tmpvar-required)) (concat "qw(" (if yas-perlsub-tmpvar-multiline-args "\\n\\t\\t" " "))
+
+	)}${3:$$(
+
+		cond
+		(yas-moving-away-p
+		 (let ((this-field (overlay-get yas--active-field-overlay 'yas--field))
+			   (this-text yas-text))
+		   (save-excursion
+			 (goto-char (yas--field-start this-field))
+			 (cond
+			  ((or yas-perlsub-tmpvar-multiline-args
+				   (and (= (1+ (count-lines 1 (point))) (1+ (count-lines 1 (yas--field-end this-field))))
+						(> (length (buffer-substring-no-properties (line-beginning-position) (line-end-position))) (+ fill-column 10))))
+			   (setq this-text (replace-regexp-in-string "\\\\(?: \\\\|\\t\\\\|\\n\\\\)+\\\\(\\\\w+\\\\)" "\\n\\t\\t\\\\1" this-text))
+			   (insert this-text)
+			   (delete-region (point) (yas--field-end this-field))
+			   (setq yas-perlsub-tmpvar-multiline-args t)
+			   (setq yas-perlsub-tmpvar-required this-text))))))
+		(t
+		 (setq yas-perlsub-tmpvar-required yas-text))
+
+	)}${3:$(
+
+		unless (zerop (length yas-perlsub-tmpvar-required)) (concat (if yas-perlsub-tmpvar-multiline-args "\\n\\t" " ") ")")
+
+	)}], [${4:$(
+
+		unless (zerop (length yas-perlsub-tmpvar-optional)) (concat "qw(" (if yas-perlsub-tmpvar-multiline-args "\\n\\t\\t" " "))
+
+	)}${4:$$(
+
+		cond
+		(yas-moving-away-p
+		 (let ((this-field (overlay-get yas--active-field-overlay 'yas--field))
+			   (this-text yas-text))
+		   (save-excursion
+			 (goto-char (yas--field-start this-field))
+			 (cond
+			  ((or yas-perlsub-tmpvar-multiline-args
+				   (and (= (1+ (count-lines 1 (point))) (1+ (count-lines 1 (yas--field-end this-field))))
+						(> (length (buffer-substring-no-properties (line-beginning-position) (line-end-position))) (+ fill-column 10))))
+			   (setq this-text (replace-regexp-in-string "\\\\(?: \\\\|\\t\\\\|\\n\\\\)+\\\\(\\\\w+\\\\)" "\\n\\t\\t\\\\1" this-text))
+			   (insert this-text)
+			   (delete-region (point) (yas--field-end this-field))
+			   (setq yas-perlsub-tmpvar-multiline-args t)
+			   (setq yas-perlsub-tmpvar-optional this-text))))))
+		(t
+		 (setq yas-perlsub-tmpvar-optional yas-text))
+
+	)}${4:$(
+
+		unless (zerop (length yas-perlsub-tmpvar-optional)) (concat (if yas-perlsub-tmpvar-multiline-args "\\n\\t" " ") ")")
+
+	)}]);
+	$0
+	return;
+}
