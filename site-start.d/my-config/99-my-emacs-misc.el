@@ -32,6 +32,9 @@
 											(list (current-buffer))))
 
 
+;; Opposite of fill-paragraph via unfill plugin
+(global-set-key (kbd "M-Q") 'unfill-paragraph)
+
 ; show-paren-mode
 (setq show-paren-delay 0)
 (show-paren-mode 1)
