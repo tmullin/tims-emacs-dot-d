@@ -56,6 +56,6 @@ IGNORED is a string passed in by comint that we don't care about."
 
 
 ;; Create my standard shell buffers.
-(dolist (name (reverse '("" "-sql" "-p4" "-err" "-repl" "-vc" "-worker")))
+(dolist (name (reverse '("" "-sql" "-git" "-err" "-repl")))
   (shell (concat "*sh" name "*"))
   )
