@@ -1,4 +1,5 @@
-(require 'zenburn-theme)
+;;(require 'zenburn-theme)
+(load-theme 'wombat)
 
 ;;(add-to-list 'load-path "~/.emacs.d/powerline/")
 ;;(require 'powerline)

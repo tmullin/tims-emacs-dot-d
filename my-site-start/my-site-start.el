@@ -59,6 +59,10 @@ if this is not true.")
      ".svn"
      "_darcs"
      ;;;;;;;; TODO: hg, monotone, svk, arch, bzr, others ...?
+
+	 ;; Added by Tim
+	 "my-config-ext"
+	 
      )
    "\\|")
   "*Regular expression of directory names to avoid in `my-site-start'

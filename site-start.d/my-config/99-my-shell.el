@@ -52,8 +52,18 @@ IGNORED is a string passed in by comint that we don't care about."
 				   (throw 'break "Long running loop detected!"))))))
 		(when errormsg
 		  (message errormsg))))))
-(add-hook 'comint-output-filter-functions 'my-comint-linkify-file-paths)
 
+;; Disabled for now
+; (add-hook 'comint-output-filter-functions 'my-comint-linkify-file-paths)
+
+(dolist (file
+		 (file-expand-wildcards
+		  (concat
+		   (file-name-directory load-file-name)
+		   "/../my-config-ext/*-shell-*.el")
+		  ))
+  (load-file file)
+  )
 
 ;; Create my standard shell buffers.
 (dolist (name (reverse '("" "-sql" "-git" "-err" "-repl")))

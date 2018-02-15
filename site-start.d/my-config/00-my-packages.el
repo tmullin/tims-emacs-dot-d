@@ -13,7 +13,6 @@
 (defvar required-packages
   '(
     icicles
-    magit
     p4
     yasnippet
     zenburn-theme
