@@ -35,7 +35,7 @@
  '(p4-follow-symlinks t)
  '(package-selected-packages
    (quote
-	(magit dash zenburn-theme yasnippet-bundle yasnippet yaml-mode unfill sqlplus smart-mode-line rvm robe rainbow-delimiters pod-mode plsense-direx php-mode perspective perl-completion p4 multiple-cursors mmm-mode js3-mode imenu-anywhere icicles flymake-ruby flycheck-color-mode-line auto-install anything ace-jump-mode)))
+	(smex magit dash zenburn-theme yasnippet-bundle yasnippet yaml-mode unfill sqlplus smart-mode-line rvm robe rainbow-delimiters pod-mode plsense-direx php-mode perspective perl-completion p4 multiple-cursors mmm-mode js3-mode imenu-anywhere icicles flymake-ruby flycheck-color-mode-line auto-install anything ace-jump-mode)))
  '(paren-mode (quote paren) nil (paren))
  '(show-paren-mode t)
  '(sml/no-confirm-load-theme t)
