@@ -60,8 +60,10 @@
 (require 'desktop)
 (load "~/.emacs.d/nameses.el")
 
-(require 'perspective)
-(persp-mode 1)
+;; Needs to be updated due to
+;; Debugger entered--Lisp error: (void-function make-variable-frame-local)
+; (require 'perspective)
+; (persp-mode 1)
 
 (filesets-init)
 

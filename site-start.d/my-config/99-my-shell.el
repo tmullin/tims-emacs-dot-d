@@ -1,5 +1,13 @@
 ;; Environmental variable overrides
 (setenv "EDITOR" "emacsclient")
+(setenv "TERM" "xterm-256color")
+
+(setenv "GRADLE_OPTS"
+		(concat
+		 (getenv "GRADLE_OPTS")
+		 " "
+		 "-Dorg.gradle.console=auto"
+		 ))
 
 ;; Turn file paths into links in shell.
 (defun my-comint-linkify-file-paths (ignored)
@@ -66,6 +74,7 @@ IGNORED is a string passed in by comint that we don't care about."
   )
 
 ;; Create my standard shell buffers.
-(dolist (name (reverse '("" "-sql" "-git" "-err" "-repl")))
+(ansi-term (getenv "SHELL"))
+(dolist (name (reverse '("" "-sql" "-git" "-git2" "-git3" "-err" "-repl")))
   (shell (concat "*sh" name "*"))
   )

@@ -7,7 +7,9 @@
 	     '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
 	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(package-initialize)
+
+; No longer necessary with Emacs 28.2
+; (package-initialize)
 
 
 (defvar required-packages

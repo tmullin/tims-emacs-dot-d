@@ -4,4 +4,6 @@
   (set-face-attribute 'default nil :font "Menlo-24")
   (delete-other-windows)
   (add-to-list 'default-frame-alist '(maximized))
+  ; Not sure if this is just macos
+  (setq comint-process-echoes t)
   )
