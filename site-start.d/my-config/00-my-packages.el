@@ -14,10 +14,10 @@
 
 (defvar required-packages
   '(
-    icicles
-    p4
-    yasnippet
-    zenburn-theme
+;    icicles
+;    p4
+;    yasnippet
+;    zenburn-theme
     ) "a list of packages to ensure are installed at launch.")
 
 

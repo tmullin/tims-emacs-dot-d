@@ -33,7 +33,7 @@
  '(p4-executable "/home/tmullin/bin/p4")
  '(p4-follow-symlinks t)
  '(package-selected-packages
-   '(gh yasnippet-snippets eterm-256color xterm-color magit-gh-pulls smex magit zenburn-theme yasnippet-bundle yaml-mode unfill sqlplus smart-mode-line rvm robe rainbow-delimiters pod-mode plsense-direx php-mode perspective perl-completion p4 multiple-cursors mmm-mode js3-mode imenu-anywhere icicles flymake-ruby flycheck-color-mode-line auto-install anything ace-jump-mode))
+   '(magit-popup yasnippet-snippets eterm-256color xterm-color smex zenburn-theme yasnippet-bundle yaml-mode unfill sqlplus rvm robe rainbow-delimiters pod-mode plsense-direx php-mode perspective perl-completion p4 multiple-cursors mmm-mode js3-mode imenu-anywhere icicles flymake-ruby flycheck-color-mode-line auto-install anything ace-jump-mode))
  '(paren-mode 'paren nil (paren))
  '(show-paren-mode t)
  '(sml/no-confirm-load-theme t)
