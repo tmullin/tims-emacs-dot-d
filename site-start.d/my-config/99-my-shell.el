@@ -9,6 +9,10 @@
 		 "-Dorg.gradle.console=auto"
 		 ))
 
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+
+
 ;; Turn file paths into links in shell.
 (defun my-comint-linkify-file-paths (ignored)
   "Turn any file paths found in the output into button links to that file.

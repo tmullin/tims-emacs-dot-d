@@ -3,8 +3,10 @@
 /ac-comphist.dat
 /auto-save-list
 /bookmarks
+/eln-cache
 /.emacs.desktop
 /filesets-cache.el
 /ido.last
 /nameses-sessions
 /smex-items
+/transient
